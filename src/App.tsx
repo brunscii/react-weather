@@ -2,8 +2,18 @@ import { useState, useEffect } from 'react'
 
 function App() {
 
-
-  
+  const [location, setLocation] = useState(null)
+  const [currentTemp, setCurrentTemp] = useState(null)
+  const [lowTemp, setLowTemp] = useState(null)
+  const [highTemp, setHighTemp] = useState(null)
+  const [condition, setCondition] = useState(null)
+  const [sunrise, setSunrise] = useState(null)
+  const [sunset, setSunset] = useState(null)
+  const [windSpeed, setWindSpeed] = useState(null)
+  const [windDirection, setWindDirection] = useState(null)
+  const [pressure, setPressure] = useState(null)
+  const [humidity, setHumidity] = useState(null)
+  const [precipitation, setPrecipitation] = useState(null)
 
   async function getWeatherData(zipCode : string) {
 
@@ -62,41 +72,41 @@ function App() {
               required />
 
       <div className="title-box inactive">
-        <h1 id="city-name"></h1>
+        <h1 id="location">{location}</h1>
       </div>
 
       <div className="weatherBox inactive">
 
-        <div className="temp"> <span id="temperature-value"></span></div>
+        <div className="temp"> <span id="temperature-value">{currentTemp}°</span></div>
 
         <div className="temperature-box">
-              <div className="low-high"> <span className="small-temp">Low <span id="low"></span> </span>
+              <div className="low-high"> <span className="small-temp">Low <span id="low">{lowTemp}°</span> </span>
                   <br/>
                   <div className="horizontal-divider"> </div>
-                  <span className="small-temp">High <span id="high"></span> </span>
+                  <span className="small-temp">High <span id="high">{highTemp}°</span> </span>
               </div>
         </div>
           
         <hr className="vertical-divider"/>
 
         <div className="other-info">
-          <div className="condition"> Condition: <span id="condition-value"></span></div>
+          <div className="condition"> Condition: <span id="condition-value">{condition}</span></div>
           <br />
           
           <div className="sun-time-box ">
-            <div className="sunrise"> Sunrise: <span id="sunriseTime"></span></div>
-            <div className="sunset"> Sunset: <span id="sunset=time"></span></div>
+            <div className="sunrise"> Sunrise: <span id="sunriseTime">{sunrise}</span></div>
+            <div className="sunset"> Sunset: <span id="sunset=time">{sunset}</span></div>
           </div>
 
           <br />
           <div className="wind-box">
-            <div className="wind-speed-dir"> Wind Speed: <span id="wind-speed-value"></span> <span id="wind-dir-value"></span></div>
+            <div className="wind-speed-dir"> Wind Speed: <span id="wind-speed-value">{windSpeed} mph </span> <span id="wind-dir-value">{windDirection}</span></div>
           </div>
 
-          <div className="pressure"> Pressure: <span id="pressure-value"></span></div>
-          <div className="humidity"> Humidity: <span id="humidity-value"></span></div>
+          <div className="pressure"> Pressure: <span id="pressure-value">{pressure}mmHg</span></div>
+          <div className="humidity"> Humidity: <span id="humidity-value">{humidity}%</span></div>
           
-          <div className="precip"> Precipitation %: <span id="precip-value"></span></div>
+          <div className="precip"> Precipitation: <span id="precip-value">{precipitation}%</span></div>
           <br />
         </div>
       </div>
