@@ -16,3 +16,12 @@ This is not a production app!
 
 To use this app you will need an API key for open weather map. Once you have this you can add it to a .env file in the root directory of the project.
 The file should have something like this `VITE_WEATHER_API_KEY: [Your API Key Here]`
+
+
+To Do:
+- [x] Move weather UI elements to separate component
+- [ ] Create context for weather information
+- [ ] Map forecast list data into separate bubbles
+- [ ] Create a separate component for the input box
+- [ ] have input box update the context
+- [ ] upon update use effect to distribute info from API
