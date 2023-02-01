@@ -24,19 +24,25 @@ function App() {
     const geoRes = await fetch('http://api.openweathermap.org/geo/1.0/zip?zip=' + zip + '&appid=' + import.meta.env.VITE_WEATHER_API_KEY)
       const geo = await geoRes.json();
       
-      console.log(geo.lat, geo.lon)
+      // console.log(geo.lat, geo.lon)
 
       let lat = geo.lat
       let lon = geo.lon
 
       const weatherRes = await fetch('https://api.openweathermap.org/data/2.5/weather?lat='+ lat + '&lon=' + lon + '&appid=' +  import.meta.env.VITE_WEATHER_API_KEY + '&units=imperial')
       const weatherRec = await weatherRes.json();
-
+      
       const locationRes = await fetch('http://api.openweathermap.org/geo/1.0/reverse?lat=' + lat + '&lon=' + lon +'&limit=5&appid=' + import.meta.env.VITE_WEATHER_API_KEY )
       const locationRec = await locationRes.json();
+      
+      const forecastRes = await fetch('https://api.openweathermap.org/data/2.5/forecast?cnt=120&lat='+ lat + '&lon=' + lon + '&appid=' +  import.meta.env.VITE_WEATHER_API_KEY + '&units=imperial')
+      const forecastRec = await forecastRes.json();
 
+      console.log(forecastRec)
 
-      console.log(weatherRec)
+      // console.log(weatherRec)
+
+      // Current Weather
 
       setCurrentTemp(weatherRec.main.temp)
       setHighTemp(weatherRec.main.temp_max)
@@ -57,7 +63,7 @@ function App() {
 
       
 
-      console.log(locationRec)
+      // console.log(locationRec)
   }
 
 
@@ -86,9 +92,9 @@ function App() {
               // This removes non numbers as input pattern doesn't seem to work in react/typescript 
               onChange={(e)=>{
                 const target = e.target as HTMLInputElement
-                console.log(e)
+                // console.log(e)
                 if( !target.value.match('^[0-9]+$') ){
-                  console.log('not a number')
+                  // console.log('not a number')
                   target.value = target.value.replaceAll(/\D/g, '')
                 }
               }}
@@ -147,3 +153,5 @@ function App() {
 }
 
 export default App
+
+
