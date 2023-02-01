@@ -1,3 +1,4 @@
+import { stringify } from 'querystring'
 import { useState, useEffect } from 'react'
 
 function App() {
@@ -27,10 +28,18 @@ function App() {
       let lat = geo.lat
       let lon = geo.lon
 
-      const res = await fetch('https://api.openweathermap.org/data/2.5/weather?lat='+ lat + '&lon=' + lon + '&appid=' +  import.meta.env.VITE_WEATHER_API_KEY + '&units=imperial')
-      const rec = await res.json();
+      const weatherRes = await fetch('https://api.openweathermap.org/data/2.5/weather?lat='+ lat + '&lon=' + lon + '&appid=' +  import.meta.env.VITE_WEATHER_API_KEY + '&units=imperial')
+      const weatherRec = await weatherRes.json();
 
-      console.log(rec)
+      console.log(weatherRec)
+
+      setCurrentTemp(weatherRec.main.temp)
+      setHighTemp(weatherRec.main.temp_max)
+      setLowTemp(weatherRec.main.temp_min)
+      
+      setCondition(weatherRec.weather[0].description)
+
+      
 
       const locationRes = await fetch('http://api.openweathermap.org/geo/1.0/reverse?lat=' + lat + '&lon=' + lon +'&limit=5&appid=' + import.meta.env.VITE_WEATHER_API_KEY )
       const locationRec = await locationRes.json();
@@ -56,6 +65,7 @@ function App() {
                   if( e.key == 'Enter' ){
                     if( target.value.match( /^\d{5}$/ ) ){
                       getWeatherData(target.value)
+                      document.querySelector('.weather-box')?.classList.toggle('inactive')
                     }
                   }
                 }
@@ -75,21 +85,23 @@ function App() {
         <h1 id="location">{location}</h1>
       </div>
 
-      <div className="weatherBox inactive">
-
-        <div className="temp"> <span id="temperature-value">{currentTemp}°</span></div>
+      <div className="weather-box inactive">
 
         <div className="temperature-box">
-              <div className="low-high"> <span className="small-temp">Low <span id="low">{lowTemp}°</span> </span>
-                  <br/>
-                  <div className="horizontal-divider"> </div>
-                  <span className="small-temp">High <span id="high">{highTemp}°</span> </span>
-              </div>
-        </div>
+          <div className="temp"> <span id="temperature-value">{currentTemp}°</span>
           
-        <hr className="vertical-divider"/>
 
-        <div className="other-info">
+            <div className="low-high"> 
+              <span className='left'>Low:</span> <span id="low-value">{lowTemp}°</span>
+              <span className='left'>High:</span> <span id="high-value">{highTemp}°</span>
+            </div>
+          </div>
+        </div>
+        
+          
+        <hr className="vertical-divider inactive"/>
+
+        <div className="other-info inactive">
           <div className="condition"> Condition: <span id="condition-value">{condition}</span></div>
           <br />
           
