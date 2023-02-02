@@ -1,11 +1,21 @@
 import { time } from 'console'
 import { stringify } from 'querystring'
-import { useState, useEffect, useContext } from 'react'
-import { WeatherContext } from './WeatherContext'
+import { useState, useEffect } from 'react'
 
 function App() {
 
-  const weatherContext = useContext(WeatherContext)
+  const [location, setLocation] = useState(null || String)
+  const [currentTemp, setCurrentTemp] = useState(null)
+  const [lowTemp, setLowTemp] = useState(null)
+  const [highTemp, setHighTemp] = useState(null)
+  const [condition, setCondition] = useState(null)
+  const [sunrise, setSunrise] = useState(null || String)
+  const [sunset, setSunset] = useState(null || String)
+  const [windSpeed, setWindSpeed] = useState(null)
+  const [windDirection, setWindDirection] = useState(null)
+  const [pressure, setPressure] = useState(null)
+  const [humidity, setHumidity] = useState(null)
+  const [precipitation, setPrecipitation] = useState(null)
 
   async function getWeatherData(zipCode : string) {
 
@@ -33,28 +43,26 @@ function App() {
       // console.log(weatherRec)
 
       // Current Weather
-      weatherContext.setWeatherData({
 
-        temp          : weatherRec.main.temp,
-        highTemp      : (weatherRec.main.temp_max),
-        lowTemp       : (weatherRec.main.temp_min),
+      setCurrentTemp(weatherRec.main.temp)
+      setHighTemp(weatherRec.main.temp_max)
+      setLowTemp(weatherRec.main.temp_min)
+      
+      setCondition(weatherRec.weather[0].description)
 
-        condition     : (weatherRec.weather[0].description),
+      setSunrise((new Date(1000 * weatherRec.sys.sunrise)).toTimeString().slice(0,5))
+      setSunset((new Date(1000 * weatherRec.sys.sunset)).toTimeString().slice(0,5))
+      
+      setWindSpeed(weatherRec.wind.speed)
+      setWindDirection(weatherRec.wind.deg)
 
-        sunrise       : ((new Date(1000 * weatherRec.sys.sunrise)).toTimeString().slice(0,5)),
-        sunset        : ((new Date(1000 * weatherRec.sys.sunset)).toTimeString().slice(0,5)),
+      setPressure(weatherRec.main.pressure)
+      setHumidity(weatherRec.main.humidity)
 
-        windSpeed     : (weatherRec.wind.speed),
-        windDirection : (weatherRec.wind.deg),
-        
-        pressure      : (weatherRec.main.pressure),
-        humidity      : (weatherRec.main.humidity),
+      setLocation(weatherRec.name + ', ' + locationRec[0].state)
 
-        location      : (weatherRec.name + ', ' + locationRec[0].state)
-        
-      })
-        
-      console.log(weatherContext.weatherData)
+      
+
       // console.log(locationRec)
   }
 
@@ -93,7 +101,7 @@ function App() {
               required />
 
       <div className="title-box inactive">
-        <h1 id="location">{weatherContext.weatherData.location}</h1>
+        <h1 id="location">{location}</h1>
       </div>
 
       <div className="weather-box inactive"
@@ -107,12 +115,12 @@ function App() {
         }}>
 
         <div className="temperature-box">
-          <div className="temp"> <span id="temperature-value">{weatherContext.weatherData.temp}°</span>
+          <div className="temp"> <span id="temperature-value">{currentTemp}°</span>
           
 
             <div className="low-high"> 
-              <span className='left'>Low:</span> <span id="low-value right">{weatherContext.weatherData.lowTemp}°</span>
-              <span className='left'>High:</span> <span id="high-value right">{weatherContext.weatherData.highTemp}°</span>
+              <span className='left'>Low:</span> <span id="low-value right">{lowTemp}°</span>
+              <span className='left'>High:</span> <span id="high-value right">{highTemp}°</span>
             </div>
           </div>
         </div>
@@ -122,19 +130,19 @@ function App() {
 
         <div className="other-info inactive">
           
-          <div className="sunrise"> Sunrise: <span id="sunriseTime">{weatherContext.weatherData.sunrise}</span></div>
-          <div className="sunset"> Sunset: <span id="sunset=time">{weatherContext.weatherData.sunset}</span></div>
+          <div className="sunrise"> Sunrise: <span id="sunriseTime">{sunrise}</span></div>
+          <div className="sunset"> Sunset: <span id="sunset=time">{sunset}</span></div>
           
           <br />
           
-          <div className="condition"> Condition: <span id="condition-value">{weatherContext.weatherData.condition}</span></div>
+          <div className="condition"> Condition: <span id="condition-value">{condition}</span></div>
 
           <br />
 
-          <div className="humidity"> Humidity: <span id="humidity-value">{weatherContext.weatherData.humidity}%</span></div>
-          <div className="pressure"> Pressure: <span id="pressure-value">{weatherContext.weatherData.pressure}mmHg</span></div>
+          <div className="humidity"> Humidity: <span id="humidity-value">{humidity}%</span></div>
+          <div className="pressure"> Pressure: <span id="pressure-value">{pressure}mmHg</span></div>
           
-          <div className="wind-speed-dir">Wind Speed: <span id="wind-value">{weatherContext.weatherData.windSpeed}mph {windDirection} deg</span></div>
+          <div className="wind-speed-dir">Wind Speed: <span id="wind-value">{windSpeed}mph {windDirection} deg</span></div>
 
         </div>
       </div>
