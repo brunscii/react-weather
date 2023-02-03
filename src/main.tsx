@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import WeatherBubble from './WeatherBubble'
 import ForecastWeatherBubble from './ForecastBubble'
 import './css/main.css'
-import { WeatherContextProvider } from './WeatherContext'
+import { WeatherContext, WeatherContextProvider } from './WeatherContext'
 
 // const {weatherData, setWeatherData} = useContext(WeatherContext)
 
@@ -12,6 +12,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     
     <WeatherContextProvider >
+      
       <App />
       <WeatherBubble />
 

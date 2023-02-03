@@ -23,18 +23,36 @@ function WeatherBubble(  ) {
   const {weatherData,setWeatherData} = useContext(WeatherContext)
   const props = weatherData;
 
-  const [location, setLocation] = useState( props.location || 'Unknown Location' )
-  const [currentTemp, setCurrentTemp] = useState( props.temp || 0 )
-  const [lowTemp, setLowTemp] = useState( props.lowTemp || 0 )
-  const [highTemp, setHighTemp] = useState( props.highTemp || 0 )
-  const [condition, setCondition] = useState( props.condition || 'Unknown' )
-  const [sunrise, setSunrise] = useState( props.sunrise || 'unknown' )
-  const [sunset, setSunset] = useState( props.sunset || 'Unknown' )
-  const [windSpeed, setWindSpeed] = useState( props.windSpeed || 'Unknown' )
-  const [windDirection, setWindDirection] = useState( props.windDirection || 'Unknown' )
-  const [pressure, setPressure] = useState( props.pressure || 'Unknown' )
-  const [humidity, setHumidity] = useState( props.humidity || 'Unknown' )
+  console.log(props)
 
+  const [location, setLocation] = useState( props.location )
+  const [currentTemp, setCurrentTemp] = useState( props.temp )
+  const [lowTemp, setLowTemp] = useState( props.lowTemp )
+  const [highTemp, setHighTemp] = useState( props.highTemp )
+  const [condition, setCondition] = useState( props.condition )
+  const [sunrise, setSunrise] = useState( props.sunrise )
+  const [sunset, setSunset] = useState( props.sunset )
+  const [windSpeed, setWindSpeed] = useState( props.windSpeed )
+  const [windDirection, setWindDirection] = useState( props.windDirection )
+  const [pressure, setPressure] = useState( props.pressure  )
+  const [humidity, setHumidity] = useState( props.humidity )
+
+  console.log(location)
+  useEffect(()=>{
+
+    setLocation     (props.location)
+    setCurrentTemp  (props.temp)
+    setLowTemp      (props.lowTemp)
+    setHighTemp     (props.highTemp)
+    setCondition    (props.condition)
+    setSunrise      (props.sunrise)
+    setSunset       (props.sunset)
+    setWindSpeed    (props.windSpeed)
+    setWindDirection(props.windDirection)
+    setPressure     (props.pressure)
+    setHumidity     (props.humidity)
+
+  },[props])
 
   return (
 

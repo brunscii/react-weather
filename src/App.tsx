@@ -30,7 +30,7 @@ function App() {
       const forecastRes = await fetch('https://api.openweathermap.org/data/2.5/forecast?cnt=120&lat='+ lat + '&lon=' + lon + '&appid=' +  import.meta.env.VITE_WEATHER_API_KEY + '&units=imperial')
       const forecastRec = await forecastRes.json();
 
-      console.log(forecastRec)
+      // console.log(forecastRec)
 
       // console.log(weatherRec)
 
@@ -56,7 +56,7 @@ function App() {
           
         }
       )
-      // console.log(locationRec)
+      console.log(weatherData)
   }
 
 
