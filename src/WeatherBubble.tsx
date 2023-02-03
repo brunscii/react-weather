@@ -1,6 +1,7 @@
 import { time } from 'console'
 import { stringify } from 'querystring'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import {WeatherContext, WeatherData} from './WeatherContext'
 
 interface WeatherProps {
   location?      : string,
@@ -17,7 +18,10 @@ interface WeatherProps {
 
 }
 
-function WeatherBubble( props : WeatherProps ) {
+function WeatherBubble(  ) {
+
+  const {weatherData,setWeatherData} = useContext(WeatherContext)
+  const props = weatherData;
 
   const [location, setLocation] = useState( props.location || 'Unknown Location' )
   const [currentTemp, setCurrentTemp] = useState( props.temp || 0 )

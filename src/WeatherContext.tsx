@@ -1,10 +1,10 @@
-import { createContext, ReactNode, useState} from 'react';
+import React, { createContext, ProviderProps, ReactNode, useState} from 'react';
+import { render } from 'react-dom';
 
 // Since this is just for display 
 // and not calculations I will 
 // set everything as strings
-
-interface WeatherData {
+export interface WeatherData {
   location?      : string,
   time?          : string,
   temp?          : string,
@@ -19,25 +19,43 @@ interface WeatherData {
   humidity?      : string
 }
 
-interface WeatherProps {
+export type WeatherContextType = {
   weatherData: WeatherData,
-  setWeatherData: (data: WeatherData)=> void
+  setWeatherData: React.Dispatch<React.SetStateAction<WeatherData>>;
 }
 
-export const WeatherContext = createContext<WeatherProps | null>( {
-  weatherData : {},
-  setWeatherData: ()=>{}
-} )
+const defaultWeatherProps : WeatherData= {
+  location: '',
+  time: '',
+  temp: '',
+  lowTemp: '',
+  highTemp: '',
+  condition: '',
+  sunrise: '',
+  sunset: '',
+  windSpeed: '',
+  windDirection: '',
+  pressure: '',
+  humidity: ''
+}
 
-// export const WeatherProvider : React.FC = ( props  ) => {
-//   const [weather, setWeather] = useState<WeatherData>({})
 
-//   return (
-//     <WeatherContext.Provider value = { {weatherData: weather, setWeatherData : setWeather} } >
-//       {props.children}
-//     </WeatherContext.Provider>
-//   )
-// }
+const WeatherContext = createContext<WeatherContextType>({weatherData:{}, setWeatherData:()=>{} });
+
+export const WeatherContextProvider = ( {children} : { children: React.ReactNode } ) => {
+  const [weather, setWeather] = useState<WeatherData>(defaultWeatherProps)
+
+  return(
+    <WeatherContext.Provider value={ {weatherData:weather, setWeatherData: setWeather} }>
+      {children}
+    </WeatherContext.Provider>
+
+  )
+
+};
+
+export { WeatherContext };
+
 
 
 
