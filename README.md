@@ -20,7 +20,7 @@ The file should have something like this `VITE_WEATHER_API_KEY: [Your API Key He
 
 To Do:
 - [x] Move weather UI elements to separate component
-- [ ] Create context for weather information
+- [x] Create context for weather information
 - [ ] Map forecast list data into separate bubbles
 - [ ] Create a separate component for the input box
 - [ ] have input box update the context

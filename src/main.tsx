@@ -5,6 +5,7 @@ import WeatherBubble from './WeatherBubble'
 import ForecastWeatherBubble from './ForecastBubble'
 import './css/main.css'
 import { WeatherContext, WeatherContextProvider } from './WeatherContext'
+import InputZipCode from './InputZipCode'
 
 // const {weatherData, setWeatherData} = useContext(WeatherContext)
 
@@ -13,8 +14,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     
     <WeatherContextProvider >
       
-      <App />
-      <WeatherBubble />
+      {/* <App /> */}
+
+      <InputZipCode />
+      
+      {/* <WeatherBubble /> */}
 
     </WeatherContextProvider>
     {/* <ForecastWeatherBubble time='1675285200' temp='55' lowTemp='2' /> */}

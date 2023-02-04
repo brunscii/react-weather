@@ -1,8 +1,18 @@
 import { time } from 'console'
 import { stringify } from 'querystring'
-import { useState, useEffect } from 'react'
+import React from 'react'
+import { useState, useEffect, useContext } from 'react'
+import WeatherBubbleWithProps from './WeatherBubbleWithProps'
+import { WeatherContext } from './WeatherContext'
 
 function Input() {
+
+  
+  const {weatherData,setWeatherData} = useContext(WeatherContext)
+  
+  let newBubble :JSX.Element = (<></>)
+  
+  const [bubbles, setBubbles] = useState([newBubble])
 
   async function getWeatherData(zipCode : string) {
 
@@ -29,12 +39,39 @@ function Input() {
 
       // console.log(weatherRec)
 
+      setWeatherData({
+
+        temp          : weatherRec.main.temp,
+        highTemp      : (weatherRec.main.temp_max),
+        lowTemp       : (weatherRec.main.temp_min),
+
+        condition     : (weatherRec.weather[0].description),
+
+        sunrise       : ((new Date(1000 * weatherRec.sys.sunrise)).toTimeString().slice(0,5)),
+        sunset        : ((new Date(1000 * weatherRec.sys.sunset)).toTimeString().slice(0,5)),
+
+        windSpeed     : (weatherRec.wind.speed),
+        windDirection : (weatherRec.wind.deg),
+        
+        pressure      : (weatherRec.main.pressure),
+        humidity      : (weatherRec.main.humidity),
+
+        location      : (weatherRec.name + ', ' + locationRec[0].state)
+        
+      } 
+    )
+
+    setBubbles([...bubbles, (<WeatherBubbleWithProps {...weatherData} />)])
+    
+
+    
+
   }
 
 
   return (
 
-    <div className='weather-app'>
+    <div className='weather-panel'>
       <input type="text" 
               id="zip-code-input" 
               aria-label="Zip Code Input" 
@@ -48,8 +85,6 @@ function Input() {
                   if( e.key == 'Enter' ){
                     if( target.value.match( /^\d{5}$/ ) ){
                       getWeatherData(target.value)
-                      document.querySelector('.weather-box')?.classList.remove('inactive')
-                      document.querySelector('.title-box')?.classList.remove('inactive')
                     }
                   }
                 }
@@ -64,6 +99,8 @@ function Input() {
                 }
               }}
               required />
+
+              {bubbles || ''}
 
     </div>
   )

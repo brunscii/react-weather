@@ -38,7 +38,7 @@ body, input {
 
 .other-info:not(.inactive) div {
   display: grid;
-  grid: auto-flow dense/auto 1fr;
+  grid: auto-flow dense/1fr 1fr;
 }
 .other-info:not(.inactive) span {
   text-align: right;
@@ -60,7 +60,6 @@ body, input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100;
 }
 
 .weather-box {
@@ -72,4 +71,10 @@ body, input {
   background-color: rgba(68, 68, 68, 0.4980392157);
   border: 5px inset rgba(51, 51, 51, 0.0588235294);
   padding: 1em;
+}
+
+.weather-panel {
+  display: grid;
+  grid-template-columns: repeat(5, -webkit-min-content);
+  grid-template-columns: repeat(5, min-content);
 }/*# sourceMappingURL=main.css.map */

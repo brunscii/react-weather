@@ -45,7 +45,7 @@ body, input {
   & div{
     // flex-direction: column;
     display: grid;
-    grid: auto-flow dense / auto 1fr;
+    grid: auto-flow dense/ 1fr 1fr;
   }
 
   span {
@@ -71,7 +71,7 @@ body, input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100;
+  // width: 100;
 }
 
 .weather-box {
@@ -81,4 +81,9 @@ body, input {
   background-color: #4444447f;
   border: 5px inset #3333330f;
   padding: 1em;
+}
+
+.weather-panel {
+  display:grid;
+  grid-template-columns: repeat(5, min-content);
 }
