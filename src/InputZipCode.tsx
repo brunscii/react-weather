@@ -100,7 +100,7 @@ function Input() {
               }}
               required />
 
-              {bubbles || ''}
+              {/* {bubbles || ''} */}
 
     </div>
   )

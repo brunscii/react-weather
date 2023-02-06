@@ -24,7 +24,7 @@ export type WeatherContextType = {
   setWeatherData: React.Dispatch<React.SetStateAction<WeatherData>>;
 }
 
-const defaultWeatherProps : WeatherData= {
+export const defaultWeatherProps : WeatherData= {
   location: '',
   time: '',
   temp: '',
@@ -39,7 +39,6 @@ const defaultWeatherProps : WeatherData= {
   humidity: ''
 }
 
-
 const WeatherContext = createContext<WeatherContextType>({weatherData:{}, setWeatherData:()=>{} });
 
 export const WeatherContextProvider = ( {children} : { children: React.ReactNode } ) => {
@@ -49,9 +48,7 @@ export const WeatherContextProvider = ( {children} : { children: React.ReactNode
     <WeatherContext.Provider value={ {weatherData:weather, setWeatherData: setWeather} }>
       {children}
     </WeatherContext.Provider>
-
   )
-
 };
 
 export { WeatherContext };
