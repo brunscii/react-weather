@@ -3,21 +3,6 @@ import { stringify } from 'querystring'
 import { useState, useEffect, useContext } from 'react'
 import {WeatherContext, WeatherData} from './WeatherContext'
 
-interface WeatherProps {
-  location?      : string,
-  temp?          : string,
-  lowTemp?       : string,
-  highTemp?      : string,
-  condition?     : string,
-  sunrise?       : string,
-  sunset?        : string,
-  windSpeed?     : string,
-  windDirection? : string,
-  pressure?      : string,
-  humidity?      : string
-
-}
-
 function WeatherBubble( props : WeatherData ) {
 
   const {weatherData,setWeatherData} = useContext(WeatherContext)

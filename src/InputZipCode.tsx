@@ -71,7 +71,7 @@ function Input() {
 
   return (
 
-    <div className='weather-panel'>
+    <div >
       <input type="text" 
               id="zip-code-input" 
               aria-label="Zip Code Input" 
@@ -84,6 +84,7 @@ function Input() {
                   const target = e.target as HTMLInputElement
                   if( e.key == 'Enter' ){
                     if( target.value.match( /^\d{5}$/ ) ){
+                      document.querySelector('.weather-app')?.classList.remove('inactive')
                       getWeatherData(target.value)
                     }
                   }

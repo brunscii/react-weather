@@ -1,22 +1,5 @@
-import { time } from 'console'
-import { stringify } from 'querystring'
 import { useState, useEffect, useContext } from 'react'
 import {WeatherContext, WeatherData} from './WeatherContext'
-
-interface WeatherProps {
-  location?      : string,
-  temp?          : string,
-  lowTemp?       : string,
-  highTemp?      : string,
-  condition?     : string,
-  sunrise?       : string,
-  sunset?        : string,
-  windSpeed?     : string,
-  windDirection? : string,
-  pressure?      : string,
-  humidity?      : string
-
-}
 
 function WeatherBubble(  ) {
 
@@ -56,7 +39,7 @@ function WeatherBubble(  ) {
 
   return (
 
-    <div className='weather-app'>
+    <div className='weather-app inactive'>
 
       <div className="title-box">
         <h1 id="location">{location}</h1>
