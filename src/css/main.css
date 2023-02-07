@@ -1,6 +1,7 @@
 body, input {
   background-color: #097248;
   color: #c0c0cb;
+  -webkit-text-fill-color: #c0c0cb;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
@@ -79,12 +80,12 @@ body, input {
 div:has(#zip-code-input) {
   display: grid;
 }
-div:has(#zip-code-input) #zip-code-input {
-  background-color: rgba(34, 51, 34, 0.4980392157);
+div:has(#zip-code-input) #zip-code-input, div:has(#zip-code-input) input:-webkit-autofill, div:has(#zip-code-input):focus {
+  box-shadow: 0 0 0 2em inset rgba(34, 51, 34, 0.4980392157), 0 0 0 2em inset #097248;
   border-color: rgba(51, 51, 51, 0.4980392157);
   border-radius: 15px;
   border-style: solid;
-  font-weight: 900;
+  border-width: 1px;
   justify-self: center;
   margin-top: 2em;
   padding-block: 0.25em;

@@ -1,8 +1,11 @@
 body, input {
   background-color: #097248;
   color: #c0c0cb;
+  -webkit-text-fill-color: #c0c0cb;
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
+
 
 #root {
   max-width: 100%;
@@ -89,13 +92,16 @@ body, input {
 div:has(#zip-code-input) {
   display: grid;
   
-  #zip-code-input {
-    background-color: #2233227f;
+  #zip-code-input, input:-webkit-autofill, &:focus  {
+
+    //This way the background-color doesn't change with the autofill
+    box-shadow: 0 0 0 2em inset #2233227f, 
+                0 0 0 2em inset #097248;
     border-color: #3333337f;
     border-radius: 15px;
     border-style: solid;
+    border-width: 1px;
 
-    font-weight: 900;    
     justify-self: center;
     margin-top: 2em;
 

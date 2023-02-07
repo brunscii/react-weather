@@ -23,5 +23,3 @@ To Do:
 - [x] Create context for weather information
 - [ ] Map forecast list data into separate bubbles
 - [ ] Create a separate component for the input box
-- [ ] have input box update the context
-- [ ] upon update use effect to distribute info from API
