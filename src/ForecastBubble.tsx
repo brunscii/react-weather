@@ -1,24 +1,61 @@
-import { time } from 'console'
-import { stringify } from 'querystring'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-interface ForecastBubbleProps {
-  time?          : string,
-  temp?          : string,
-  lowTemp?       : string,
-  highTemp?      : string,
-  condition?     : string,
-  windSpeed?     : string,
-  windDirection? : string,
-  pressure?      : string,
-  humidity?      : string
+export interface ForecastBubbleProps {
+  time          : string,
+  temp          : string,
+  lowTemp       : string,
+  highTemp      : string,
+  condition     : string,
+  windSpeed     : string,
+  windDirection : string,
+  pressure      : string,
+  humidity      : string
 
 }
 
 function ForecastWeatherBubble( props : ForecastBubbleProps ) {
 
+  console.log(props.temp)
 
-  const [time, setTime] = useState( props.temp || Date.now() )
+  /*
+  clouds
+: 
+{all: 100}
+dt
+: 
+1675976400
+dt_txt
+: 
+"2023-02-09 21:00:00"
+main
+: 
+{temp: 65.44, feels_like: 65.3, temp_min: 65.44, temp_max: 65.44, pressure: 1021, …}
+pop
+: 
+0
+sys
+: 
+{pod: 'd'}
+visibility
+: 
+10000
+weather
+: 
+[{…}]
+wind
+: 
+deg
+: 
+217
+gust
+: 
+21.18
+speed
+: 
+9.95
+*/
+
+  const [time, setTime] = useState( props.time || Date.now.toString() )
   const [currentTemp, setCurrentTemp] = useState( props.temp || 0 )
   const [lowTemp, setLowTemp] = useState( props.lowTemp || 0 )
   const [highTemp, setHighTemp] = useState( props.highTemp || 0 )
@@ -29,21 +66,28 @@ function ForecastWeatherBubble( props : ForecastBubbleProps ) {
   const [humidity, setHumidity] = useState( props.humidity || 'Unknown' )
 
 
+
+  useEffect( () => {
+    setTime           ( props.time )
+    setCurrentTemp    ( props.temp )
+    setLowTemp        ( props.lowTemp )
+    setHighTemp       ( props.highTemp )
+    setCondition      ( props.condition )
+    setWindSpeed      ( props.windSpeed )
+    setWindDirection  ( props.windDirection )
+    setPressure       ( props.pressure )
+    setHumidity       ( props.humidity )
+    
+  }, [props])
+
   return (
 
-    <div className='weather-app'>
+    <div className='forecase-data'>
 
-      <div className="weather-box"
-        onClick={(e) => {
-          // Loop throught the child nodes and toggle inactive
-          for( let nestedElement of e.currentTarget.children){
-            // Skip the temperature-box that is already visible
-            if(!nestedElement.matches('.temperature-box'))
-              nestedElement.classList.toggle('inactive')
-          }
-        }}>
+      <div className="weather-box">
 
         <div className="temperature-box">
+          <div className="time"><span id='time-value'>{ new Date(parseInt(time)*1000).toLocaleString('en-US',{timeZone: 'est'}) }</span></div>
           <div className="temp"> <span id="temperature-value">{currentTemp}°</span>
           
 
@@ -55,9 +99,9 @@ function ForecastWeatherBubble( props : ForecastBubbleProps ) {
         </div>
         
           
-        <hr className="vertical-divider inactive"/>
+        <hr className="vertical-divider" />
 
-        <div className="other-info inactive">
+        <div className="other-info ">
           
           <div className="condition"> Condition: <span id="condition-value">{condition}</span></div>
 

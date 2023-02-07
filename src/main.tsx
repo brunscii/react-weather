@@ -2,8 +2,9 @@ import {StrictMode} from 'react'
 import ReactDOM from 'react-dom/client'
 import WeatherBubble from './WeatherBubble'
 import './css/main.css'
-import { WeatherContext, WeatherContextProvider } from './WeatherContext'
+import { WeatherContextProvider } from './WeatherContext'
 import InputZipCode from './InputZipCode'
+import ForecastWeatherBubble from './ForecastBubble'
 
 // const {weatherData, setWeatherData} = useContext(WeatherContext)
 

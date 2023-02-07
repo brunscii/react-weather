@@ -16,7 +16,8 @@ export interface WeatherData {
   windSpeed?     : string,
   windDirection? : string,
   pressure?      : string,
-  humidity?      : string
+  humidity?      : string,
+  forecast?      : []
 }
 
 export type WeatherContextType = {
@@ -36,7 +37,8 @@ export const defaultWeatherProps : WeatherData= {
   windSpeed: '',
   windDirection: '',
   pressure: '',
-  humidity: ''
+  humidity: '',
+  forecast: []
 }
 
 const WeatherContext = createContext<WeatherContextType>({weatherData:{}, setWeatherData:()=>{} });

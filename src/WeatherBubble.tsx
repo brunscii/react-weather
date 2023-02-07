@@ -1,41 +1,44 @@
 import { useState, useEffect, useContext } from 'react'
+import ForecastBubble from './ForecastBubble'
 import {WeatherContext, WeatherData} from './WeatherContext'
+import {ForecastBubbleProps} from './ForecastBubble'
+function WeatherBubble( ) {
 
-function WeatherBubble(  ) {
+  const {weatherData} = useContext(WeatherContext)
 
-  const {weatherData,setWeatherData} = useContext(WeatherContext)
-  const props = weatherData;
 
-  console.log(props)
+  
 
-  const [location, setLocation] = useState( props.location )
-  const [currentTemp, setCurrentTemp] = useState( props.temp )
-  const [lowTemp, setLowTemp] = useState( props.lowTemp )
-  const [highTemp, setHighTemp] = useState( props.highTemp )
-  const [condition, setCondition] = useState( props.condition )
-  const [sunrise, setSunrise] = useState( props.sunrise )
-  const [sunset, setSunset] = useState( props.sunset )
-  const [windSpeed, setWindSpeed] = useState( props.windSpeed )
-  const [windDirection, setWindDirection] = useState( props.windDirection )
-  const [pressure, setPressure] = useState( props.pressure  )
-  const [humidity, setHumidity] = useState( props.humidity )
+  const [ location, setLocation ]           = useState( weatherData.location )
+  const [ currentTemp, setCurrentTemp ]     = useState( weatherData.temp )
+  const [ lowTemp, setLowTemp ]             = useState( weatherData.lowTemp )
+  const [ highTemp, setHighTemp ]           = useState( weatherData.highTemp )
+  const [ condition, setCondition ]         = useState( weatherData.condition )
+  const [ sunrise, setSunrise ]             = useState( weatherData.sunrise )
+  const [ sunset, setSunset ]               = useState( weatherData.sunset )
+  const [ windSpeed, setWindSpeed ]         = useState( weatherData.windSpeed )
+  const [ windDirection, setWindDirection ] = useState( weatherData.windDirection )
+  const [ pressure, setPressure ]           = useState( weatherData.pressure  )
+  const [ humidity, setHumidity ]           = useState( weatherData.humidity )
+  const [ forecast, setForecast ]           = useState( weatherData.forecast )
 
   console.log(location)
   useEffect(()=>{
 
-    setLocation     (props.location)
-    setCurrentTemp  (props.temp)
-    setLowTemp      (props.lowTemp)
-    setHighTemp     (props.highTemp)
-    setCondition    (props.condition)
-    setSunrise      (props.sunrise)
-    setSunset       (props.sunset)
-    setWindSpeed    (props.windSpeed)
-    setWindDirection(props.windDirection)
-    setPressure     (props.pressure)
-    setHumidity     (props.humidity)
+    setLocation     ( weatherData.location )
+    setCurrentTemp  ( weatherData.temp )
+    setLowTemp      ( weatherData.lowTemp )
+    setHighTemp     ( weatherData.highTemp )
+    setCondition    ( weatherData.condition )
+    setSunrise      ( weatherData.sunrise )
+    setSunset       ( weatherData.sunset )
+    setWindSpeed    ( weatherData.windSpeed )
+    setWindDirection( weatherData.windDirection )
+    setPressure     ( weatherData.pressure )
+    setHumidity     ( weatherData.humidity )
+    setForecast     ( weatherData.forecast )
 
-  },[props])
+  },[weatherData])
 
   return (
 
@@ -86,6 +89,46 @@ function WeatherBubble(  ) {
           <div className="wind-speed-dir">Wind Speed: <span id="wind-value">{windSpeed}mph {windDirection} deg</span></div>
 
         </div>
+
+        </div>
+      <div className='forecast-box'>
+        {
+        forecast?.map( ( forecastData ) =>{
+          let fd : ForecastBubbleProps  = {
+            time          : forecastData['dt'],
+            temp          : forecastData['main']['temp'],
+            lowTemp       : forecastData['main']['temp_min'],
+            highTemp      : forecastData['main']['temp_max'],
+            condition     : forecastData['weather'][0]['main'],
+            windSpeed     : forecastData['wind']['speed'],
+            windDirection : forecastData['wind']['deg'],
+            pressure      : forecastData['main']['pressure'],
+            humidity      : forecastData['main']['humidity']
+          }
+
+          console.log(forecastData)
+          return (
+            
+            <ForecastBubble key={new Date(parseInt(fd.time)*1000).toLocaleDateString('en-US')} {...fd} />
+            
+          )
+        } 
+        // .map((node, index, nodes)=>{
+            
+        //     if(index < nodes.length && nodes[index+1].key != node.key){
+        //       return(
+        //         <div >
+        //           {nodes.slice(0,index)}
+        //         </div>
+        //       )
+        //     }
+        //     return(
+        //       <>
+        //       </>
+        //     )
+        //   }
+
+        )}
       </div>
 
     </div>

@@ -1,7 +1,4 @@
-import { time } from 'console'
-import { stringify } from 'querystring'
-import React from 'react'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext } from 'react'
 import WeatherBubbleWithProps from './WeatherBubbleWithProps'
 import { WeatherContext } from './WeatherContext'
 
@@ -56,7 +53,8 @@ function Input() {
         pressure      : (weatherRec.main.pressure),
         humidity      : (weatherRec.main.humidity),
 
-        location      : (weatherRec.name + ', ' + locationRec[0].state)
+        location      : (weatherRec.name + ', ' + locationRec[0].state),
+        forecast      : forecastRec.list
         
       } 
     )
