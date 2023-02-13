@@ -30,6 +30,7 @@ export function ForecastSorted( ){
           return (
           <div className="day-box">
             <h2>{day}</h2>
+            //insert weather forecast bubbles here
           </div>
           )
         })
