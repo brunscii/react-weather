@@ -5,8 +5,6 @@ body, input {
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-
-
 #root {
   max-width: 100dvw;
   // max-height: 100dvh;
@@ -15,6 +13,11 @@ body, input {
 
 #condition-value {
   text-transform: capitalize;
+}
+
+.forecast {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .temp{

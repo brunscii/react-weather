@@ -91,7 +91,7 @@ speed
           <div className="temp"> <span id="temperature-value">{currentTemp}°</span>
           
 
-            <div className="low-high"> 
+            <div className="low-high inactive"> 
               <span className='left'>Low:</span> <span id="low-value right">{lowTemp}°</span>
               <span className='left'>High:</span> <span id="high-value right">{highTemp}°</span>
             </div>
@@ -99,9 +99,9 @@ speed
         </div>
         
           
-        <hr className="vertical-divider" />
+        <hr className="vertical-divider inactive" />
 
-        <div className="other-info ">
+        <div className="other-info inactive">
           
           <div className="condition"> Condition: <span id="condition-value">{condition}</span></div>
 
