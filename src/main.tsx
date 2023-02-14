@@ -19,8 +19,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       {/* <WeatherPane /> */}
       
       
-      {/* <InputZipCode />
-      <WeatherBubble /> */}
+      <InputZipCode />
+      {/* <WeatherBubble /> */}
+
       <ForecastSorted />
     </WeatherContextProvider>
     {/* <ForecastWeatherBubble time='1675285200' temp='55' lowTemp='2' /> */}

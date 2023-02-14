@@ -20,7 +20,7 @@ function WeatherBubble( ) {
   const [ windDirection, setWindDirection ] = useState( weatherData.windDirection )
   const [ pressure, setPressure ]           = useState( weatherData.pressure  )
   const [ humidity, setHumidity ]           = useState( weatherData.humidity )
-  const [ forecast, setForecast ]           = useState( weatherData.forecast )
+  // const [ forecast, setForecast ]           = useState( weatherData.forecast )
 
   console.log(location)
   useEffect(()=>{
@@ -36,7 +36,7 @@ function WeatherBubble( ) {
     setWindDirection( weatherData.windDirection )
     setPressure     ( weatherData.pressure )
     setHumidity     ( weatherData.humidity )
-    setForecast     ( weatherData.forecast )
+    // setForecast     ( weatherData.forecast )
 
   },[weatherData])
 
@@ -91,45 +91,7 @@ function WeatherBubble( ) {
         </div>
 
         </div>
-      <div className='forecast-box'>
-        {
-        forecast?.map( ( forecastData ) =>{
-          let fd : ForecastBubbleProps  = {
-            time          : forecastData['dt'],
-            temp          : forecastData['main']['temp'],
-            lowTemp       : forecastData['main']['temp_min'],
-            highTemp      : forecastData['main']['temp_max'],
-            condition     : forecastData['weather'][0]['main'],
-            windSpeed     : forecastData['wind']['speed'],
-            windDirection : forecastData['wind']['deg'],
-            pressure      : forecastData['main']['pressure'],
-            humidity      : forecastData['main']['humidity']
-          }
-
-          console.log(forecastData)
-          return (
-            
-            <ForecastBubble key={new Date(parseInt(fd.time)*1000).toLocaleDateString('en-US')} {...fd} />
-            
-          )
-        } 
-        // .map((node, index, nodes)=>{
-            
-        //     if(index < nodes.length && nodes[index+1].key != node.key){
-        //       return(
-        //         <div >
-        //           {nodes.slice(0,index)}
-        //         </div>
-        //       )
-        //     }
-        //     return(
-        //       <>
-        //       </>
-        //     )
-        //   }
-
-        )}
-      </div>
+      
 
     </div>
 
