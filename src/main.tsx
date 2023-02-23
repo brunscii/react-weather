@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       
       
       <InputZipCode />
-      {/* <WeatherBubble /> */}
+      <WeatherBubble />
 
       <ForecastSorted />
     </WeatherContextProvider>

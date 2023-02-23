@@ -6,7 +6,7 @@ import { WeatherContext, WeatherData } from "./WeatherContext"
 export function ForecastSorted( ){
   
   // The days of week is an array of tuples containing the day name followed by it's forecast info
-  let daysOfWeek : [string, [] ][]= [ ['Sunday', [] ] ,[ 'Monday', [] ], [ 'Tuesday', [] ], [ 'Wednesday', [] ], [ 'Thursday', [] ], [ 'Friday', [] ], [ 'Saturday', [] ] ]
+  // let daysOfWeek : [string, [] ][]= [ ['Sunday', [] ] ,[ 'Monday', [] ], [ 'Tuesday', [] ], [ 'Wednesday', [] ], [ 'Thursday', [] ], [ 'Friday', [] ], [ 'Saturday', [] ] ]
 
   const {weatherData} = useContext(WeatherContext)
 
@@ -14,11 +14,51 @@ export function ForecastSorted( ){
 
   useEffect( () => {
     setForecast( weatherData.forecast )
+    if( forecast )
+      console.log( forecastToList( forecast ))
+    // {
+    //   for( let f in forecastToList( forecast ) ){
+    //     console.log( f )
+    //   }
+    // }
+    // if( forecast )
+      // console.log( forecastToList( forecast ) )
+  }, [weatherData.forecast] )
+  
+  /* The easiest way to sort the forecast is going to be load all of the 
+    forecast objects into a map of days to forecast lists. From there you
+    can check for the first day in the list and sort the resulting obj so
+    the first day is first and so on and so forth. You could also just 
+    create an object using the first day from the forecast as a starting 
+    point and use the day name from the subsequent days.
+    
+    ie) the first forecast is wednesday. You can sort everything so that
+    the object starts with wednesday and ends with tuesday. if you start
+    with sunday at index 0 then you can rotate so that wednesday is 0
+    instead of 3 using the pop and push method or something similar. */
 
-    console.log( forecast )
-  }, [weatherData] )
 
+  
+  
+  function forecastToList( forecast : object[] ){
+    const DaysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    let week = {
+      'Sunday'    : [],
+      'Monday'    : [],
+      'Tuesday'   : [],
+      'Wednesday' : [],
+      'Thursday'  : [],
+      'Friday'    : [],
+      'Saturday'  : []
+    }
+    // TODO: make a interface for the forecast objects to appease the TypeScript gods
+    forecast?.forEach( f => {
+      week[DaysOfWeek[new Date( f['dt'] * 1000 ).getDay()]].push(f)
+    })
 
+    return week
+    
+  }
 
   /* This function sorts the list of days so that the current day is at index 0
      and sorts the forecast into the list of days */
@@ -47,20 +87,26 @@ export function ForecastSorted( ){
       return daysOfWeek;
     }
   }
+
+  
   
   return (
     <div className='forecast'>
-      { 
-        sortDays().map( (day) => {
-          console.log(day)
-          return (
-          <div className="day-box">
-            <h2>{day}</h2>
-            //insert weather forecast bubbles here
-          </div>
-          )
-        })
-      }
+      
+        
+
+{
+        //   console.log(day)
+        //   return (
+        //   <div className="day-box">
+        //     <h2>{day}</h2>
+        //     //insert weather forecast bubbles here
+        //   </div>
+        //   )
+        // })
+
+}
+      
     </div>
   )
 }
