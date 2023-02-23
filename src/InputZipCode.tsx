@@ -32,11 +32,12 @@ function Input() {
       const forecastRes = await fetch('https://api.openweathermap.org/data/2.5/forecast?cnt=120&lat='+ lat + '&lon=' + lon + '&appid=' +  import.meta.env.VITE_WEATHER_API_KEY + '&units=imperial')
       const forecastRec = await forecastRes.json();
 
-      console.log(forecastRec)
+      // console.log(JSON.stringify(forecastRes))
 
       // console.log(weatherRec)
 
-      setWeatherData({
+      setWeatherData(
+        {
 
         temp          : weatherRec.main.temp,
         highTemp      : (weatherRec.main.temp_max),
@@ -58,7 +59,7 @@ function Input() {
         
       } 
     )
-
+      console.log(forecastRec.list)
     setBubbles([...bubbles, (<WeatherBubbleWithProps {...weatherData} />)])
     
 
