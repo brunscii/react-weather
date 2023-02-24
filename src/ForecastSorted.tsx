@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { DefaultSerializer } from "v8"
+import { DefaultSerializer, setFlagsFromString } from "v8"
 import { WeatherContext, WeatherData } from "./WeatherContext"
 
 
@@ -7,22 +7,18 @@ export function ForecastSorted( ){
   
   // The days of week is an array of tuples containing the day name followed by it's forecast info
   // let daysOfWeek : [string, [] ][]= [ ['Sunday', [] ] ,[ 'Monday', [] ], [ 'Tuesday', [] ], [ 'Wednesday', [] ], [ 'Thursday', [] ], [ 'Friday', [] ], [ 'Saturday', [] ] ]
+  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
   const {weatherData} = useContext(WeatherContext)
 
   const [ forecast, setForecast ]= useState( weatherData.forecast )
-
+  // const [ forecastSorted, setForecastSorted ] = useState( forecastToList( forecast ) )
   useEffect( () => {
     setForecast( weatherData.forecast )
-    if( forecast )
-      console.log( forecastToList( forecast ))
-    // {
-    //   for( let f in forecastToList( forecast ) ){
-    //     console.log( f )
-    //   }
-    // }
+
     // if( forecast )
-      // console.log( forecastToList( forecast ) )
+    //   setForecastSorted( forecastToList( forecast ) )
+
   }, [weatherData.forecast] )
   
   /* The easiest way to sort the forecast is going to be load all of the 
@@ -40,74 +36,81 @@ export function ForecastSorted( ){
 
   
   
-  function forecastToList( forecast : object[] ){
-    const DaysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    let week = {
-      'Sunday'    : [],
-      'Monday'    : [],
-      'Tuesday'   : [],
-      'Wednesday' : [],
-      'Thursday'  : [],
-      'Friday'    : [],
-      'Saturday'  : []
-    }
-    // TODO: make a interface for the forecast objects to appease the TypeScript gods
-    forecast?.forEach( f => {
-      week[DaysOfWeek[new Date( f['dt'] * 1000 ).getDay()]].push(f)
-    })
+  // function forecastToList( forecast ){
+  //   const DaysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  //   let week = {
+  //     'Sunday'    : [],
+  //     'Monday'    : [],
+  //     'Tuesday'   : [],
+  //     'Wednesday' : [],
+  //     'Thursday'  : [],
+  //     'Friday'    : [],
+  //     'Saturday'  : []
+  //   }
+  //   // TODO: make a interface for the forecast objects to appease the TypeScript gods
+  //   forecast?.forEach( f => {
+  //     week[DaysOfWeek[new Date( f['dt'] * 1000 ).getDay()]].push(f)
+  //   })
 
-    return week
+  //   return week
     
-  }
+  // }
 
   /* This function sorts the list of days so that the current day is at index 0
      and sorts the forecast into the list of days */
-  function sortDays(){
+  // function sortDays(){
 
-    const currentDay = new Date( Date.now() ).getDay()
+  //   const currentDay = new Date( Date.now() ).getDay()
 
 
-    // sort the forecast info into the days of the week
-    forecast?.map( forecastInfo => {
-      console.log( new Date(forecastInfo['dt']).getDay() )
-    } )
-    // sort the list of days so they are in order begining with today
-    if( currentDay === 0 ){
+  //   // sort the forecast info into the days of the week
+  //   forecast?.map( forecastInfo => {
+  //     console.log( new Date(forecastInfo['dt']).getDay() )
+  //   } )
+  //   // sort the list of days so they are in order begining with today
+  //   if( currentDay === 0 ){
 
-      return [...daysOfWeek]
+  //     return [...daysOfWeek]
 
-    } 
-    else {
+  //   } 
+  //   else {
       
-      let rotationCount = currentDay % daysOfWeek.length
+  //     let rotationCount = currentDay % daysOfWeek.length
 
-      for( let i = 0; i < rotationCount; i++ )
-        daysOfWeek.push( daysOfWeek.shift()  || [ '', [] ] )
+  //     for( let i = 0; i < rotationCount; i++ )
+  //       daysOfWeek.push( daysOfWeek.shift()  || [ '', [] ] )
       
-      return daysOfWeek;
-    }
-  }
+  //     return daysOfWeek;
+  //   }
+  // }
 
   
   
   return (
+    <>
     <div className='forecast'>
-      
-        
+      {daysOfWeek.map( day => {
+        return (
+          <div className="forecast-day">
+            <h2>{day}</h2>
+            {forecast?.
+                      filter( forecastPoint => new Date(forecastPoint['dt'] * 1000).getDay() == daysOfWeek.indexOf(day) ).
+                      map( forecastEntry => {
+                        return (
+                          <p>
+                            <span>{new Date(forecastEntry.dt * 1000).toLocaleTimeString('en-us')} -- </span>
+                            <span>{forecastEntry['main']['temp']} °F</span>
+                          </p>
+                        )
 
-{
-        //   console.log(day)
-        //   return (
-        //   <div className="day-box">
-        //     <h2>{day}</h2>
-        //     //insert weather forecast bubbles here
-        //   </div>
-        //   )
-        // })
+                      } 
+            )}
+          </div>
+        )
+      })}
 
-}
-      
     </div>
+    </>
   )
 }
 
