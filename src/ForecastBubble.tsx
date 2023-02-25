@@ -13,9 +13,9 @@ export interface ForecastBubbleProps {
 
 }
 
-function ForecastWeatherBubble( props : ForecastBubbleProps ) {
+function ForecastBubble( props : ForecastBubbleProps ) {
 
-  console.log(props.temp)
+  // console.log(props.temp)
 
   /*
   clouds
@@ -87,11 +87,12 @@ speed
       <div className="weather-box">
 
         <div className="temperature-box">
-          <div className="time"><span id='time-value'>{ new Date(parseInt(time)*1000).toLocaleString('en-US',{timeZone: 'est'}) }</span></div>
+          <div className='date'><span id="date-value">{ new Date(parseInt(time)*1000).toLocaleDateString('en-US',{timeZone: 'est'}) }</span></div>
+          <div className="time"><span id='time-value'>{ new Date(parseInt(time)*1000).toLocaleTimeString('en-US',{timeZone: 'est'}) }</span></div>
           <div className="temp"> <span id="temperature-value">{currentTemp}°</span>
           
 
-            <div className="low-high inactive"> 
+            <div className="low-high "> 
               <span className='left'>Low:</span> <span id="low-value right">{lowTemp}°</span>
               <span className='left'>High:</span> <span id="high-value right">{highTemp}°</span>
             </div>
@@ -99,9 +100,9 @@ speed
         </div>
         
           
-        <hr className="vertical-divider inactive" />
+        <hr className="vertical-divider " />
 
-        <div className="other-info inactive">
+        <div className="other-info ">
           
           <div className="condition"> Condition: <span id="condition-value">{condition}</span></div>
 
@@ -120,6 +121,6 @@ speed
   )
 }
 
-export default ForecastWeatherBubble
+export default ForecastBubble
 
 

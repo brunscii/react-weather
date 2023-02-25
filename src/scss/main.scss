@@ -18,6 +18,13 @@ body, input {
 .forecast {
   display: flex;
   justify-content: space-evenly;
+
+  &-day{
+    display: grid;
+    gap: 2em;
+    grid-template-rows: auto repeat(8,20em);    
+  }
+
 }
 
 .temp{
@@ -93,7 +100,7 @@ body, input {
 
 .weather-box {
   max-width: 10em;
-  max-height: max-content;
+  max-height: 20em;
   border-radius: 15px;
   background-color: #4444447f;
   border: 5px inset #3333330f;
