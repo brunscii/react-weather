@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { DefaultSerializer, setFlagsFromString } from "v8"
 import { WeatherContext, WeatherData } from "./WeatherContext"
+import ForecastBubble, {ForecastBubbleProps} from './ForecastBubble'
 
 
 export function ForecastSorted( ){
@@ -96,11 +97,27 @@ export function ForecastSorted( ){
             {forecast?.
                       filter( forecastPoint => new Date(forecastPoint['dt'] * 1000).getDay() == daysOfWeek.indexOf(day) ).
                       map( forecastEntry => {
+                        // let fcProps = new ForecastBubbleProps()
                         return (
-                          <p>
+                          <>
+
+                          {/* <ForecastBubble time={forecastEntry['dt'] || '0'} /> */}
+                          <ForecastBubble time={forecastEntry.dt}
+                                          temp={forecastEntry['main']['temp']}
+                                          lowTemp={forecastEntry['main']['temp_min']}
+                                          highTemp={forecastEntry['main']['temp_max']}
+                                          condition={forecastEntry['weather'][0]['description']}
+                                          windSpeed={forecastEntry['wind']['speed']}
+                                          windDirection={forecastEntry['wind']['deg']}
+                                          pressure={forecastEntry['main']['pressure']}
+                                          humidity={forecastEntry['main']['humidity']} />
+
+
+                          {/* <p>
                             <span>{new Date(forecastEntry.dt * 1000).toLocaleTimeString('en-us')} -- </span>
                             <span>{forecastEntry['main']['temp']} °F</span>
-                          </p>
+                          </p> */}
+                          </>
                         )
 
                       } 
