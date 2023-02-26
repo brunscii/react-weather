@@ -18,10 +18,14 @@ body, input {
   display: flex;
   justify-content: space-evenly;
 }
+.forecast-data {
+  max-height: -moz-min-content;
+  max-height: min-content;
+}
 .forecast-day {
   display: grid;
   gap: 2em;
-  grid-template-rows: auto repeat(8, 20em);
+  grid-template-rows: 2em repeat(8, 1fr);
 }
 
 .temp {

@@ -19,10 +19,16 @@ body, input {
   display: flex;
   justify-content: space-evenly;
 
+  &-data{
+    max-height: min-content;
+  }
+
   &-day{
     display: grid;
     gap: 2em;
-    grid-template-rows: auto repeat(8,20em);    
+    grid-template-rows: 2em repeat(8, 1fr);  
+    
+      
   }
 
 }

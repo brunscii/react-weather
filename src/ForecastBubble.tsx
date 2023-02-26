@@ -82,9 +82,16 @@ speed
 
   return (
 
-    <div className='forecase-data'>
+    <div className='forecast-data'>
 
-      <div className="weather-box">
+      <div className="weather-box" 
+      onClick={(e) => {
+        // Loop throught the child nodes and toggle inactive
+        for( let nestedElement of e.currentTarget.children){
+          // Skip the temperature-box that is already visible
+          if(!nestedElement.matches('.temperature-box'))
+            nestedElement.classList.toggle('inactive')
+        }}}>
 
         <div className="temperature-box">
           <div className='date'><span id="date-value">{ new Date(parseInt(time)*1000).toLocaleDateString('en-US',{timeZone: 'est'}) }</span></div>
@@ -100,9 +107,9 @@ speed
         </div>
         
           
-        <hr className="vertical-divider " />
+        <hr className="vertical-divider inactive" />
 
-        <div className="other-info ">
+        <div className="other-info inactive">
           
           <div className="condition"> Condition: <span id="condition-value">{condition}</span></div>
 
