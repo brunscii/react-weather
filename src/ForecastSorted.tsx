@@ -102,7 +102,7 @@ export function ForecastSorted( ){
                           <>
 
                           {/* <ForecastBubble time={forecastEntry['dt'] || '0'} /> */}
-                          <ForecastBubble time={forecastEntry.dt}
+                          <ForecastBubble time={forecastEntry['dt']}
                                           temp={forecastEntry['main']['temp']}
                                           lowTemp={forecastEntry['main']['temp_min']}
                                           highTemp={forecastEntry['main']['temp_max']}
