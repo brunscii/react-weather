@@ -90,7 +90,7 @@ function App() {
                 }
               }}
               required />
-
+     
               {/* <WeatherBubble props={weatherData} /> */}
 
   </div>

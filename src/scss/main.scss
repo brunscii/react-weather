@@ -1,5 +1,5 @@
 body, input {
-  background-color: #097248;
+  background: radial-gradient(#0f0f53, #070756, #0f0f53);
   color: #c0c0cb;
   -webkit-text-fill-color: #c0c0cb;
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -111,6 +111,19 @@ body, input {
   background-color: #4444447f;
   border: 5px inset #3333330f;
   padding: 1em;
+}
+
+.forecast-button {
+  color: red !important;
+  display: block;
+  position: absolute;
+  border-radius: 10px;
+  padding-inline: .6rem;
+  padding-block: .25rem;
+  font-style: inherit;
+  font-size: 1rem;
+  background:rgba(250, 217, 3, 0.449);
+
 }
 
 div:has(#zip-code-input) {

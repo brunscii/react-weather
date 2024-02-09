@@ -9,7 +9,8 @@ export interface ForecastBubbleProps {
   windSpeed     : string,
   windDirection : string,
   pressure      : string,
-  humidity      : string
+  humidity      : string,
+  className?    : string
 
 }
 
@@ -82,7 +83,7 @@ speed
 
   return (
 
-    <div className='forecast-data'>
+    <div className={'forecast-data ' + props.className ? props.className : ''}>
 
       <div className="weather-box" 
       onClick={(e) => {

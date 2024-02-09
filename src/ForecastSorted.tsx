@@ -92,7 +92,7 @@ export function ForecastSorted( ){
     <div className='forecast'>
       {daysOfWeek.map( day => {
         return (
-          <div className="forecast-day">
+          <div className="forecast-day inactive">
             <h2>{day}</h2>
             {forecast?.
                       filter( forecastPoint => new Date(forecastPoint['dt'] * 1000).getDay() == daysOfWeek.indexOf(day) ).
@@ -102,15 +102,16 @@ export function ForecastSorted( ){
                           <>
 
                           {/* <ForecastBubble time={forecastEntry['dt'] || '0'} /> */}
-                          <ForecastBubble time={forecastEntry['dt']}
-                                          temp={forecastEntry['main']['temp']}
-                                          lowTemp={forecastEntry['main']['temp_min']}
-                                          highTemp={forecastEntry['main']['temp_max']}
-                                          condition={forecastEntry['weather'][0]['description']}
-                                          windSpeed={forecastEntry['wind']['speed']}
+                          <ForecastBubble time={forecastEntry         ['dt']}
+                                          temp={forecastEntry         ['main']['temp']}
+                                          lowTemp={forecastEntry      ['main']['temp_min']}
+                                          highTemp={forecastEntry     ['main']['temp_max']}
+                                          condition={forecastEntry    ['weather'][0]['description']}
+                                          windSpeed={forecastEntry    ['wind']['speed']}
                                           windDirection={forecastEntry['wind']['deg']}
-                                          pressure={forecastEntry['main']['pressure']}
-                                          humidity={forecastEntry['main']['humidity']} />
+                                          pressure={forecastEntry     ['main']['pressure']}
+                                          humidity={forecastEntry     ['main']['humidity']} 
+                                          />
 
 
                           {/* <p>
